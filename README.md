@@ -5,16 +5,6 @@
 redrawing_master is a PyQt5 application that displays an image on the right half of the screen and projects the cursor
 position from the left half onto the image area.
 
-## Features
-
-- **Image Display:** Shows an image on the right side of the screen.
-- **Cursor Projection:** Displays a red circle indicating the cursor's position from the left side.
-- **Zoom:** Scale the image in and out using the mouse wheel.
-- **Adjustable Projection Radius:** Change the size of the cursor projection by holding `Ctrl` and using the mouse
-  wheel.
-- **Drag Image:** Move the image within the window by clicking and dragging with the left mouse button.
-- **Clipboard Integration:** Automatically updates the displayed image when an image is copied to the clipboard.
-
 ## Controls
 
 - **Zoom In/Out:**
@@ -45,9 +35,3 @@ Install the required Python packages using:
 ```bash
 pip install -r requirements.txt
 ```
-
-This project is licensed under the MIT License.
-
-## Contact
-
-For any questions or support, please contact [igorpheik@gmail.com](mailto:igorpheik@gmail.com).
