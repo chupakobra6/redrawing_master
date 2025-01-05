@@ -14,11 +14,11 @@ class CursorProjectionWindow(QMainWindow):
         self.setGeometry(screen_width // 2, 0, screen_width // 2, screen_height)
         self.setWindowFlags(Qt.WindowStaysOnTopHint | Qt.Window)
         self.setAttribute(Qt.WA_TranslucentBackground)
-        self.setWindowTitle("Redrawing_master")
+        self.setWindowTitle("Redrawing Master")
         self.setWindowIcon(QIcon("logo.png"))
         self.image = QPixmap(image_path)
         if self.image.isNull():
-            raise ValueError(f"Не удалось загрузить изображение из пути: {image_path}")
+            raise ValueError(f"Couldn't load image from path: {image_path}")
         self.setMinimumSize(200, 200)
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_cursor_position)
@@ -52,15 +52,12 @@ class CursorProjectionWindow(QMainWindow):
         painter.setRenderHint(QPainter.SmoothPixmapTransform)
         painter.setOpacity(0.5)
 
-        # Вычисление нового размера изображения на основе масштаба
         new_width = int(self.size().width() * self.scale_factor)
         new_height = int(self.size().height() * self.scale_factor)
 
-        # Предотвращение нулевого или отрицательного размера
         new_width = max(1, new_width)
         new_height = max(1, new_height)
 
-        # Масштабирование изображения с новыми размерами
         scaled_image = self.image.scaled(
             new_width,
             new_height,
@@ -68,28 +65,22 @@ class CursorProjectionWindow(QMainWindow):
             Qt.SmoothTransformation
         )
 
-        # Центрирование изображения внутри окна с учётом сдвига
         x = (self.width() - scaled_image.width()) / 2 + self.image_offset.x()
         y = (self.height() - scaled_image.height()) / 2 + self.image_offset.y()
         painter.drawPixmap(int(x), int(y), scaled_image)
 
-        # Получение размеров экрана
         screen_width = QApplication.primaryScreen().geometry().width()
         screen_height = QApplication.primaryScreen().geometry().height()
 
-        # Вычисление относительных координат курсора
         relative_x = self.cursor_x / (screen_width / 2)
         relative_y = self.cursor_y / screen_height
 
-        # Ограничение значений от 0 до 1
         relative_x = max(0.0, min(1.0, relative_x))
         relative_y = max(0.0, min(1.0, relative_y))
 
-        # Вычисление позиции проекции курсора внутри окна
         projection_x = relative_x * self.width()
         projection_y = relative_y * self.height()
 
-        # Рисование проекции курсора
         pen = QPen(QColor(255, 0, 0), 3)
         painter.setPen(pen)
         painter.setBrush(QColor(255, 0, 0))

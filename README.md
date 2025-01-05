@@ -5,7 +5,7 @@
 redrawing_master is a PyQt5 application that displays an image on the right half of the screen and projects the cursor
 position from the left half onto the image area.
 
-## Controls
+## Usage
 
 - **Zoom In/Out:**
     - **Action:** Scroll the mouse wheel.
